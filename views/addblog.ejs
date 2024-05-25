@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <%- include('./partials/head') %>
+    <title>add Blog</title>
+</head>
+<body>
+    <%- include('./partials/nav') %>
+       <div class="container mt-3">
+        <form action="/blog" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title">
+            
+            <div class="form-floating">
+                    <textarea class="form-control mt-3" name="body" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                    <label for="floatingTextarea2">Body</label>
+            </div>
+            <label class="form-label">Image</label>
+            <input type="file" class="form-control" id="img" name="img">
+            <button class="btn btn-success" type="submit" >Submit</button>
+
+
+        </div>
+        </form>
+    </div>
+    <%- include('./partials/script') %>
+</body>
+</html>
