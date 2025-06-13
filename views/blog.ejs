@@ -8,45 +8,42 @@
 
 <body>
     <%- include('./partials/nav') %>
-        <div class="container mt-4">
+    <div class="container mt-4">
+        <h1><%= blogs.Title %></h1>
+        <img src="<%= blogs.coverImageUrl %>" class="img-fluid" width="700px" />
+        <pre class="mt-3"><%= blogs.body %></pre>
+        <div class="mt-3">
+            <img src="<%= blogs.createdBy.profileImageUrl %>" class="rounded-circle" width="70px" />
+            <%= blogs.createdBy.fullName %>
+        </div>
+    </div>
 
-
-            <h1>
-                <%=blogs.Title %>
-            </h1>
-            <img src="<%=blogs.coverImageUrl %>" width="700px" />
-            <pre class="mt-3 container" style="display: flex;
-            text-wrap: wrap;"> <%= blogs.body %> </pre>
-            <div class="container mt-3">
-                <img src="<%= blogs.createdBy.profileImageUrl %>" width="70px">
-                <%= blogs.createdBy.fullName %>
+    <div class="container mt-3">
+        <% if (locals.user) { %>
+        <form action="/blog/comment/<%= blogs._id %>" method="post">
+            <div class="mb-3">
+                <label for="comment" class="form-label"><strong>COMMENT</strong> (<%= comments.length %>)</label>
+                <input type="text" class="form-control" id="comment" name="content" aria-describedby="text" />
             </div>
+            <button type="submit" class="btn btn-primary">ADD</button>
+        </form>
+        <% } %>
+    </div>
 
-        </div>
-        <div class="container mt-3">
-            <% if (locals.user) { %>
-
-                <form action="/blog/comment/<%= blogs._id %>" method="post">
-       
-                    <div class="mb-3">
-                      <label  class="form-label"><strong>COMMENT</strong></label><%= `(${comments.length})` %>
-                      <input type="text" class="form-control" id="text" name="content" aria-describedby="text">
-                    
-                    </div>
-                 
-                    <button type="submit" class="btn btn-primary">ADD</button>
-                  </form>
-            <% } %>
-           
-        </div>
-        <div class="container mt-3">
-            <% comments.forEach(comment => { %>
-                <img src="<%= comment.createdBy.profileImageUrl %>" width="70px">
-                <%= comment.createdBy.fullName %>
+    <div class="container mt-3">
+        <% comments.forEach(comment => { %>
+        <div class="d-flex align-items-center mb-3">
+            <img src="<%= comment.createdBy.profileImageUrl %>" class="rounded-circle me-2" width="70px" />
+            <div>
+                <strong><%= comment.createdBy.fullName %></strong>
                 <pre><%= comment.content %></pre>
-            <% }) %>
+            </div>
         </div>
-        <%- include('./partials/script') %>
+        <% }) %>
+    </div>
+
+    <%- include('./partials/script') %>
 </body>
+
 
 </html>

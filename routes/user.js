@@ -1,5 +1,6 @@
 let user = require('../models/user') 
 let {Router} = require('express');
+let ratelimiter = require("../middleware/ratelimiter")
 
 let router = Router();
 
@@ -18,7 +19,7 @@ router.post('/signup' , async (req , res) =>
 
     return res.redirect('/')
 })
-router.post('/signin' , async(req , res) =>
+router.post('/signin' , ratelimiter ,async(req , res) =>
 {
     let{email , password} = req.body
     try{

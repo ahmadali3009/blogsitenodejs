@@ -1,0 +1,6 @@
+.pre-with-ellipsis {
+    max-height: 5em; /* Adjust as needed */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+}

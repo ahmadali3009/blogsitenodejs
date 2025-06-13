@@ -8,7 +8,8 @@ let userRouter = require('./routes/user')
 let blogRouter = require('./routes/blog')
 let connect = require('./connection')
 const cheakAuthenticationUser = require('./middleware/authentication')
-const user = require('./models/user')
+const user = require('./models/user');
+const { timeStamp } = require("console");
 let PORT = process.env.PORT || 8000;
 server = express()
 
@@ -22,6 +23,9 @@ server.use(cheakAuthenticationUser('token'))
 server.use(express.urlencoded({extended : false}))
 server.use(express.static(path.resolve("./public")))
 
+
+
+
 server.get('/' , async (req , res)=>
 {
     let allBlogs = await blog.find({})
@@ -33,7 +37,7 @@ server.get('/' , async (req , res)=>
 })
 
 server.use('/blog' , blogRouter)
-server.use('/user' , userRouter)
+server.use('/user'  , userRouter)
 server.listen(PORT ,()  => {
     console.log("the server is running port:8000")
 })
